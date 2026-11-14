@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module.js';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard.js';
 import { RolesGuard } from './auth/guards/roles.guard.js';
 import { AlertasModule } from './alertas/alertas.module.js';
+import { CultivosModule } from './cultivos/cultivos.module.js';
 import { DispositivosModule } from './dispositivos/dispositivos.module.js';
 import { HistoricoModule } from './historico/historico.module.js';
 import { MedicionesModule } from './mediciones/mediciones.module.js';
@@ -60,6 +61,7 @@ import { UsuariosModule } from './usuarios/usuarios.module.js';
     HistoricoModule,
     RiegoModule,
     AlertasModule,
+    CultivosModule,
   ],
   controllers: [AppController],
   providers: [
