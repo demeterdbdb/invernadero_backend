@@ -1,13 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {RolesGuard} from '../auth/guards/roles.guard.js';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import {Roles} from '../auth/decorators/roles.decorator.js';
 import {RolEnum} from './entities/usuario.entity.js';
 import { UsuariosService } from './usuarios.service.js';
 import { CreateUsuarioDto } from './dto/create-usuario.dto.js';
 import { UpdateUsuarioDto, EliminarUsuarioDto } from './dto/update-usuario.dto.js';
 
-@UseGuards(AuthGuard('jwt'),RolesGuard)
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}

@@ -16,17 +16,18 @@ export class Usuario {
     correo: string;
     @Column({type:'varchar', length: 255})
     password_hash: string;
-    @Column({type:'enum', enum: RolEnum, default: RolEnum.VISOR})
+    // enumName debe coincidir con el tipo enum que ya existe en Supabase.
+    @Column({type:'enum', enum: RolEnum, enumName: 'rol_usuario', default: RolEnum.VISOR})
     rol: RolEnum;
     @Column({type:'boolean', default: true})
     activo: boolean;
     @Column({type:'int4', nullable:true})
     creado_por: number;
-    @Column({type:'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    @Column({type:'timestamptz', default: () => 'CURRENT_TIMESTAMP'})
     creado_en: Date;
     @Column({type:'int4', nullable:true})
     editado_por: number;
-    @Column({type:'timestamp', nullable:true})
+    @Column({type:'timestamptz', nullable:true})
     editado_en: Date;
     @Column({type:'boolean', default: false})
     eliminado: boolean;

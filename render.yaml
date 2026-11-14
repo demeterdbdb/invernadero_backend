@@ -1,0 +1,35 @@
+# Blueprint de Render: https://render.com/docs/blueprint-spec
+# En Render: New + → Blueprint → seleccionar este repositorio.
+services:
+  - type: web
+    name: invernadero-backend
+    runtime: node
+    plan: free
+    # Se usa corepack (incluido en Node 24) para tener la misma versión de pnpm
+    # que en desarrollo. --prod=false instala devDependencies (@nestjs/cli) para compilar.
+    buildCommand: corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm build
+    startCommand: node dist/main.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: COREPACK_ENABLE_DOWNLOAD_PROMPT
+        value: "0"
+      # Cadena del Session Pooler de Supabase (puerto 5432). Se captura en el
+      # panel de Render; no se guarda en el repositorio.
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_SSL
+        value: "true"
+      # Nunca true contra Supabase: TypeORM alteraría el esquema.
+      - key: DB_SYNC
+        value: "false"
+      # Conexiones máximas por instancia hacia el pooler.
+      - key: DB_POOL_MAX
+        value: "5"
+      # Render genera un secreto aleatorio para firmar los JWT.
+      - key: JWT_SECRET
+        generateValue: true
+      # Opcional: dominio(s) del frontend separados por coma. Vacío = cualquiera.
+      - key: CORS_ORIGIN
+        sync: false
