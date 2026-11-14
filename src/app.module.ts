@@ -9,6 +9,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard.js';
 import { RolesGuard } from './auth/guards/roles.guard.js';
 import { AlertasModule } from './alertas/alertas.module.js';
 import { DispositivosModule } from './dispositivos/dispositivos.module.js';
+import { HistoricoModule } from './historico/historico.module.js';
 import { MedicionesModule } from './mediciones/mediciones.module.js';
 import { RiegoModule } from './riego/riego.module.js';
 import { UsuariosModule } from './usuarios/usuarios.module.js';
@@ -54,6 +55,9 @@ import { UsuariosModule } from './usuarios/usuarios.module.js';
     AuthModule,
     DispositivosModule,
     MedicionesModule,
+    // Debe ir después de MedicionesModule: comparten el prefijo /mediciones
+    // y GET /mediciones/actual tiene que registrarse antes que GET /mediciones/:id.
+    HistoricoModule,
     RiegoModule,
     AlertasModule,
   ],
